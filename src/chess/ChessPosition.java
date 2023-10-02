@@ -1,0 +1,33 @@
+package chess;
+
+import boardgame.Position;
+//TA DANDO UM ERRO AQUI!!
+public class ChessPosition {
+    private char column;
+    private int row;
+    public ChessPosition(char column, int row) {
+        if(row < 1 || row > 8 || column > 'h' || column < 'a'){
+            throw new ChessException("ERRO ao instanciar a posição. posições válidas de a1 a h8");
+        }
+        this.column = column;
+        this.row = row;
+    }
+    public char getColumn() {
+        return column;
+    }
+    public int getRow() {
+        return row;
+    }
+    //187, ChessException e ChessPosition
+    protected Position toPosition(){
+        return new Position(8 - row, column - 'a');
+    }
+    protected static ChessPosition fromPosition (Position position){
+        return new ChessPosition((char)('a'- position.getColumn()), 8 - position.getRow());
+    }
+    
+    @Override
+    public String toString(){
+        return "" +column + row;
+    }
+}
